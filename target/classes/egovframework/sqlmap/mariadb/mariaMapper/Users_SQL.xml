@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Sample">
+
+	<typeAlias  alias="UsersVo" type="semi.project.domain.UsersVo"/>
+	
+	<select id="usersDAO.selectUserList" resultClass="UsersVo">
+		SELECT * FROM users
+	</select>
+	
+	<select id="usersDAO.selectUserId" parameterClass="java.lang.String" resultClass="UsersVo">
+		SELECT USER_ID,
+			,PASSWORD
+			,USER_NAME
+			,USE_YN
+			,USER_EMAIL
+			,SL_YN
+			,USER_TEL
+			,FIRST_INPUT_ILSI
+		 FROM users
+		 WHERE 1=1
+		 AND USER_ID=#userId#
+	</select>
+ 
+</sqlMap>
