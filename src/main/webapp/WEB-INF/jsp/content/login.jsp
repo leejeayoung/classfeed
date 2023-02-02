@@ -38,7 +38,7 @@
 				<div class="inpBar"></div>
 			</div>
 			<button type="submit" value="로그인" class="actionBtn">로그인</button>
-			<a href="member/sign_up.do" class="otherBtn">회원가입</a>
+			<a href="/sign_up.do" class="otherBtn">회원가입</a>
 		</form>
 	</div>
 	<p class="copy">Copyright © 2021 CLASSFEED.</p>

@@ -367,7 +367,7 @@ $(document).on('click', '#completeBtn', function(){
     memberData['phone'] = memberData['phone'].substring(0,3) + '-' + memberData['phone'].substring(3,7) + '-' + memberData['phone'].substring(7,11)
 
     $.ajax({ 
-		url: "../member/signUp",
+		url: "/member/signUp",
 		type: "post",
         data: memberData,
 		async: false,

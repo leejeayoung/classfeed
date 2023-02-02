@@ -32,6 +32,21 @@ public class UsersController {
 		return "content/login";
 	}
 	
+	@RequestMapping("sign_up.do")
+    public String login() {
+        return "content/sign_up";
+    }
+	
+	 @RequestMapping("/member/signUp")
+	 public String signUp(UsersVo usersVo){
+		 System.out.println("UsersController signUp In");
+		 return "ok";
+	 }
+	 @RequestMapping("/member/checkId")
+	 public String checkId(UsersVo usersVo){
+		 System.out.println("UsersController checkId");
+		 return "ok";
+	 }
 	@RequestMapping(value="/loginPage.do")
 	public String loginPage() throws Exception{
 		return "sample/loginPage";
