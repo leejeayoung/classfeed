@@ -16,6 +16,7 @@
 		<!-- <intercept-url pattern="/**" access="ROLE_USER" /> -->
 		<intercept-url pattern="/userPage/**" access="hasRole('ROLE_USER')"/>
 		<intercept-url pattern="/**" access="permitAll"/>
+		<intercept-url pattern="/sign/**" access="permitAll"/>
 		<access-denied-handler ref="userDeniedHandler" />
 
 
@@ -24,7 +25,8 @@
 			password-parameter="loginPwd"
 			login-processing-url="/login"
 			login-page="/loginPage.do"
-			default-target-url="/"
+			default-target-url="/login/loginSuccess.do"
+			authentication-success-handler-ref="sucessHandler"
 		/>
 
 		<!-- 로그아웃할 url 및 로그아웃성공시 이동할 url -->
@@ -45,5 +47,8 @@
 
 	<beans:bean id="userService" class=" semi.project.service.impl.UsersServiceImpl"/>
 	<beans:bean id="userAuthProvider" class="semi.security.CustomAuthenticationProvider"/>
+	<beans:bean id="sucessHandler" class="semi.security.UserLoginSuccessHandler"/>
+	<beans:bean id="bcryptPasswordEncoder"
+        class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
 
 </beans:beans>

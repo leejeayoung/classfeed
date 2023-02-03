@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="_csrf" content="${_csrf.token}">
+	<meta name="_csrf_header" content="${_csrf.headerName}">
     <title>CLASSFEED | 회원가입</title>
     <link rel="shortcut icon" href="../img/favicon.ico" type="image/x-icon">
 	<link rel="icon" href="../img/favicon.ico" type="image/x-icon">
@@ -143,13 +145,14 @@ $(document).on('click', '.nextBtn' ,function(){
 })
 // 회원정보 입력_이전 버튼
 $(document).on('click', '.prevBtn', function(){
-    $('.stepWrap1').css({
+	location.reload();
+    /* $('.stepWrap1').css({
         'margin-left':'0px',
         opacity:'1'
     })
     $('.stepWrap2').css({
         opacity:'0'
-    })
+    }) */
 })
 
 
@@ -172,15 +175,24 @@ $(document).on('click','.idCheckSend', function(){
     var thisId = $('#idInp').val();
     console.log(thisId)
     $.ajax({ 
-		url: "../member/checkId",
+		url: "${pageContext.request.contextPath}/login/checkId.do",
 		type: "post",
         data: {
             id:thisId,
             type:$('#memberType').val()
         },
 		async: false,
+		/* beforeSend: function(xhr){ // XMLHTTPRequest
+		    xhr.setRequestHeader("X-Ajax-call", "true");
+		  }, */
+		beforeSend: function (jqXHR, settings) {
+	         var header = $("meta[name='_csrf_header']").attr("content");
+	         var token = $("meta[name='_csrf']").attr("content");
+	         jqXHR.setRequestHeader(header, token);
+		},
 		success: function(data) {
 		    console.log(data);
+		    
             if(data=="noId"){
                 alert("사용가능한 아이디입니다.")
                 $('#idInp').prop('readonly', true)
@@ -231,17 +243,22 @@ $(document).on('keyup', '#emailInp' ,function(){
 //이메일 인증번호 발송 클릭
 $(document).on('click', '.emailNumSend', function(){
     $.ajax({ 
-		url: "../member/checkEmail",
+		url: "${pageContext.request.contextPath}/login/checkEmail.do",
 		type: "post",
 		async: false,
         data: {
             email:$('#emailInp').val(),
             type:$('#memberType').val(),
         },
+        beforeSend: function (jqXHR, settings) {
+	         var header = $("meta[name='_csrf_header']").attr("content");
+	         var token = $("meta[name='_csrf']").attr("content");
+	         jqXHR.setRequestHeader(header, token);
+		},
 		success: function(data) {
 		    console.log(data);
             if(data=="noEmail"){
-                alert('CLASSFEED는 포트폴리오 샘플사이트로서, \n외부 메일링 서비스에 가입되지 않았습니다.\n\n기능 체험을 원하시면 인증번호 1234를 입력해주세요.');
+                alert('CLASSFEED는 샘플사이트로서, \n외부 메일링 서비스에 가입되지 않았습니다.\n\n기능 체험을 원하시면 인증번호 1234를 입력해주세요.');
                 $('.emailNumSend').removeClass('on')
                 $('#emailInp').prop('readonly',true)
                 $('.checkNumWrap').slideDown();
@@ -367,10 +384,15 @@ $(document).on('click', '#completeBtn', function(){
     memberData['phone'] = memberData['phone'].substring(0,3) + '-' + memberData['phone'].substring(3,7) + '-' + memberData['phone'].substring(7,11)
 
     $.ajax({ 
-		url: "/member/signUp",
+		url: "${pageContext.request.contextPath}/login/signUpSuccess.do",
 		type: "post",
         data: memberData,
 		async: false,
+		beforeSend: function (jqXHR, settings) {
+	         var header = $("meta[name='_csrf_header']").attr("content");
+	         var token = $("meta[name='_csrf']").attr("content");
+	         jqXHR.setRequestHeader(header, token);
+		},
 		success: function(data) {
 		    if(data == 'OK'){
                 alert('회원가입이 완료되었습니다. \n가입하신 정보로 로그인해주세요.')

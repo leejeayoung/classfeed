@@ -10,7 +10,7 @@
 	</select>
 	
 	<select id="usersDAO.selectUserId" parameterClass="java.lang.String" resultClass="UsersVo">
-		SELECT USER_ID,
+		SELECT USER_ID
 			,PASSWORD
 			,USER_NAME
 			,USE_YN
@@ -22,5 +22,24 @@
 		 WHERE 1=1
 		 AND USER_ID=#userId#
 	</select>
- 
+	
+	<select id="usersDAO.selectUserIdCheck" parameterClass="java.lang.String" resultClass="int">
+		SELECT count(*)
+		 FROM users
+		 WHERE 1=1
+		 AND USER_ID=#userId#
+	</select>
+	
+	<select id="usersDAO.selectUserEmailCheck" parameterClass="java.lang.String" resultClass="int">
+		SELECT count(*)
+		 FROM users
+		 WHERE 1=1
+		 AND USER_Email=#userEmail#
+	</select>
+	
+	<insert id="userDAO.inserUser" parameterClass="UsersVo">
+	INSERT INTO classfeed.users
+		(USER_ID, PASSWORD, USER_NAME, USE_YN, USER_EMAIL, SL_YN, USER_TEL, FIRST_INPUT_ILSI)
+	VALUES(#userId#, #password#, #userName#, 'Y', #userEmail#, 'N', #userTel#, DATE_FORMAT(now(), '%Y%m%d%H%i%s'))
+	</insert>
 </sqlMap>
