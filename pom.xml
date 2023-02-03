@@ -222,6 +222,7 @@
 			<artifactId>spring-security-test</artifactId>
 			<version>${security.version}</version>
 		</dependency>
+		
 <!-- mysql이나 oracle DB 사용시 아래 설정 추가
         <dependency>
             <groupId>ojdbc</groupId>

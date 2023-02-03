@@ -28,13 +28,14 @@
 
 			<img src="img/classfeedLogo.png" class="logo">
 		</div>
-		<form action="member/login.do" method="post" class="loginForm">
+		<form action="${pageContext.request.contextPath}/login" method="post" class="loginForm">
 			<div class="inpWrap">
-				<input type="text" name = "id" class="inp" placeholder="아이디">
+				<input type="text" name = "loginId" class="inp" placeholder="아이디">
 				<div class="inpBar"></div>
 			</div>
 			<div class="inpWrap">
-				<input type="password" name = "pwd" class="inp" placeholder="비밀번호">
+				<input type="password" name = "loginPwd" class="inp" placeholder="비밀번호">
+				<input type="hidden" name = "${_csrf.parameterName}" value="${_csrf.token}">
 				<div class="inpBar"></div>
 			</div>
 			<button type="submit" value="로그인" class="actionBtn">로그인</button>

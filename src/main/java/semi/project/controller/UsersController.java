@@ -3,9 +3,11 @@ package semi.project.controller;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.inject.Inject;
 import javax.sound.midi.MidiDevice.Info;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,6 +28,8 @@ public class UsersController {
 	private UsersService usersService;
 	
 	
+	
+	
 	@RequestMapping("/main.do")
 	public String usersList(UsersVo usersVo) throws Exception {
 		System.out.println("UsersController usersList In");
@@ -42,15 +46,6 @@ public class UsersController {
 		 System.out.println("UsersController signUp In");
 		 return "ok";
 	 }
-	 @RequestMapping("/member/checkId")
-	 public String checkId(UsersVo usersVo){
-		 System.out.println("UsersController checkId");
-		 return "ok";
-	 }
-	@RequestMapping(value="/loginPage.do")
-	public String loginPage() throws Exception{
-		return "sample/loginPage";
-	}
 
 	@RequestMapping(value="/userPage/userTest.do")
 	public String userPage() throws Exception{

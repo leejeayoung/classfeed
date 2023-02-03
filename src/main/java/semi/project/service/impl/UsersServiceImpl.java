@@ -3,6 +3,7 @@ package semi.project.service.impl;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -35,6 +36,26 @@ public class UsersServiceImpl extends EgovAbstractServiceImpl implements UsersSe
 		}
 
 		return user;
+	}
+
+	@Override
+	public int selectUserIdCheck(String userId) throws Exception {
+		// TODO Auto-generated method stub
+		// ID 중복체크
+		return usersDAO.getUserIdCount(userId);
+	}
+
+	@Override
+	public int selectUserEmailCheck(String userEmail) throws Exception {
+		// TODO Auto-generated method stub
+		// EMAIL 중복체크
+		return usersDAO.getUserEmailCount(userEmail);
+	}
+
+	@Override
+	public void insertUesr(UsersVo usersVo) throws Exception {
+		// TODO Auto-generated method stub
+		usersDAO.insertUser(usersVo);
 	}
 
 }
