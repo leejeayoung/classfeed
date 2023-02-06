@@ -31,4 +31,9 @@ public class UsersDAO extends EgovAbstractDAO{
 	public void insertUser(UsersVo usersVo) throws Exception{
 		insert("userDAO.inserUser", usersVo);
 	}
+	
+	public List<?> selectUserById(String userId) throws Exception {
+		return list("usersDAO.selectUserById",userId);
+	}
+
 }

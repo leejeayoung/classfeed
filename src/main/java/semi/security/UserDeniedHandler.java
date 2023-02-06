@@ -37,9 +37,8 @@ public class UserDeniedHandler implements AccessDeniedHandler {
 		// null로 받은 경우는 X-Ajax-call 헤더 변수가 없다는 의미이기 때문에
 		// ajax가 아닌 일반적인 방법으로 접근했음을 의미한다.
 		if(ajaxHeader == null) {
-			log.info("ajaxHeader In");
+			
 			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-			log.info("ajaxHeader auth >>"+auth);
 			Object principal = auth.getPrincipal();
 
 			req.setAttribute("username", principal);

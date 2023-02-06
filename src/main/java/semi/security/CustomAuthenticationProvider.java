@@ -1,5 +1,7 @@
 package semi.security;
 
+import javax.inject.Inject;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -7,31 +9,30 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
+import lombok.extern.log4j.Log4j;
 import semi.project.domain.UsersVo;
 
+@Log4j
 public class CustomAuthenticationProvider implements AuthenticationProvider {
 
 	@Autowired
 	private UserDetailsService userDetailsService;
+	
+	@Inject
+    PasswordEncoder passwordEncoder;
 
 	@Override
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 		// TODO Auto-generated method stub
 
-		System.out.println("authentication : " + authentication);
-
 		String loginUserName = String.valueOf(authentication.getPrincipal());
 		String loginPassword = String.valueOf(authentication.getCredentials());
-		System.out.println("loginUserName : " + loginUserName);
-		System.out.println("loginPassword : " + loginPassword);
 
 		UsersVo user = (UsersVo) userDetailsService.loadUserByUsername(loginUserName);
 
-		if(!matchPassword(loginPassword, user.getPassword())) {
-
-			System.out.println();
-
+		if(!passwordEncoder.matches(loginPassword, user.getPassword())) {
 			throw new BadCredentialsException(loginUserName);
 		}
 

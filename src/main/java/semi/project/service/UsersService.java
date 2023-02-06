@@ -16,4 +16,6 @@ public interface UsersService {
 	int selectUserIdCheck(String userId) throws Exception;	//ID중복체크
 	int selectUserEmailCheck(String userEmail) throws Exception;	//EMAIL중복체크
 	void insertUesr(UsersVo usersVo) throws Exception;
+	
+	List<?> selectUserById(String userId) throws Exception;
 }

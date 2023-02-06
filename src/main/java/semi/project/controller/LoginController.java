@@ -1,5 +1,7 @@
 package semi.project.controller;
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -11,17 +13,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import lombok.extern.log4j.Log4j;
+import lombok.extern.slf4j.Slf4j;
 import semi.project.domain.UsersVo;
+import semi.project.service.SubjectService;
 import semi.project.service.UsersService;
 
 @Log4j
+@Slf4j
 @Controller
 public class LoginController {
 
 	@Autowired
 	private UsersService usersService;
+	
+	@Autowired
+	private SubjectService subjectService;
 	
 	@Inject
     PasswordEncoder passwordEncoder;
@@ -51,6 +60,7 @@ public class LoginController {
 	@ResponseBody
 	 public String checkEmail(@RequestParam("email") String userEmail, @RequestParam("type") String type) throws Exception{
 		int count = usersService.selectUserEmailCheck(userEmail);
+		
 		if(count > 0) {		// Email 존재(중복)
 			return "yesEmail";
 		}else {
@@ -76,7 +86,6 @@ public class LoginController {
 		String encPassword = passwordEncoder.encode(pwd);
 		pwd = encPassword;
 		
-		
 		log.info("type >>"+type);
 		log.info("name >>"+name);
 		log.info("agency >>"+agency);
@@ -85,20 +94,30 @@ public class LoginController {
 		log.info("pwd >>"+pwd);
 		
 		UsersVo usersVo = new UsersVo();
-		usersVo.setUserId(id);
+		usersVo.setUser_id(id);
 		usersVo.setPassword(pwd);
-		usersVo.setUserName(name);
-		usersVo.setUserEmail(email);
-		usersVo.setUserTel(phone);
+		usersVo.setUser_name(name);
+		usersVo.setUser_type(type);
+		usersVo.setUser_email(email);
+		usersVo.setUser_tel(phone);
+
 		usersService.insertUesr(usersVo);
 		return "1";
 	 }
 	
 	@RequestMapping(value = "/login/loginSuccess.do")
-	 public String test(HttpServletRequest request, HttpSession session) throws Exception{
-		String userId = (String) session.getAttribute("userId");
+	 public ModelAndView test(HttpServletRequest request, HttpSession session) throws Exception{
+		String user_id = (String) session.getAttribute("userId");
+		ModelAndView mav = new ModelAndView("content/main");
+		List<UsersVo> userList = (List<UsersVo>) usersService.selectUserById(user_id);
+		if((userList.get(0).getUser_type()).equals("student")) {
+			mav.addObject("sList", userList);
+		}else {
+			
+			mav.addObject("tList", userList);
+			mav.addObject("tSubList", subjectService.selectSubjectByTid(user_id));
+		}
 		
-		    
-		return "test";
+		return mav;
 	 }
 }

@@ -12,6 +12,8 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="_csrf" content="${_csrf.token}">
+	<meta name="_csrf_header" content="${_csrf.headerName}">
 	<link rel="shortcut icon" href="../img/favicon.ico" type="image/x-icon">
 	<link rel="icon" href="../img/favicon.ico" type="image/x-icon">
 	<title>CLASSFEED | ${param.title}</title>
@@ -34,7 +36,7 @@
 		<p class="toolTipBot">사이드메뉴</p>
 
 	</button>
-	<a href="/" class="homeLink">
+	<a href="#" class="homeLink" onClick="top.location='javascript:location.reload()'">
 		<img src="../img/classfeedLogo.png">
 	</a>
 
@@ -61,34 +63,34 @@
 <nav class="sideNav">
 	<c:choose>
 		<c:when test="${param.title == '클래스'}">
-			<a href="/" class="sideNavLink toolTipWrap on">
+			<a href="/login/loginSuccess.do" class="sideNavLink toolTipWrap on">
 				<i class="fas fa-chalkboard-teacher"></i>
 				<p class="toolTipBot">클래스</p>
 			</a>
 		
-			<a href="/main/keepList.do" class="sideNavLink toolTipWrap">
+			<a href="/subject/keep.do" class="sideNavLink toolTipWrap">
 				<i class="fas fa-archive"></i>
 				<p class="toolTipBot">수업보관함</p>
 			</a>
 		</c:when>
 		<c:when test="${param.title == '수업보관함'}">
-			<a href="/" class="sideNavLink toolTipWrap">
+			<a href="/login/loginSuccess.do" class="sideNavLink toolTipWrap">
 				<i class="fas fa-chalkboard-teacher"></i>
 				<p class="toolTipBot">클래스</p>
 			</a>
 		
-			<a href="/main/keepList.do" class="sideNavLink toolTipWrap on">
+			<a href="/subject/keep.do" class="sideNavLink toolTipWrap on">
 				<i class="fas fa-archive"></i>
 				<p class="toolTipBot">수업보관함</p>
 			</a>
 		</c:when>
 		<c:when test="${param.title != '클래스' && param.title != '수업보관함'}">
-			<a href="/" class="sideNavLink toolTipWrap">
+			<a href="/login/loginSuccess.do" class="sideNavLink toolTipWrap">
 				<i class="fas fa-chalkboard-teacher"></i>
 				<p class="toolTipBot">클래스</p>
 			</a>
 		
-			<a href="/main/keepList.do" class="sideNavLink toolTipWrap">
+			<a href="/subject/keep.do" class="sideNavLink toolTipWrap">
 				<i class="fas fa-archive"></i>
 				<p class="toolTipBot">수업보관함</p>
 			</a>
@@ -104,12 +106,12 @@
 		<c:choose>
 			<c:when test="${!empty tList}">
 				<c:forEach items="${tList}" var="teacherVo">
-					<p>${teacherVo.tname} 선생님, 반갑습니다!</p>
+					<p>${teacherVo.user_name} 선생님, 반갑습니다!</p>
 				</c:forEach>
 			</c:when>
 			<c:when test="${!empty sList}">
 				<c:forEach items="${sList}" var="studentVo">
-					<p>${studentVo.sname} 님, 반갑습니다!</p>
+					<p>${studentVo.user_name} 님, 반갑습니다!</p>
 				</c:forEach>
 			</c:when>
 		</c:choose>
@@ -157,10 +159,10 @@
 				<c:choose>
 					<c:when test="${!empty tSubList}">
 						<c:forEach items="${tSubList}" var="subjectVo">
-							<a href="../list/mystream.do?sucode=${subjectVo.sucode}" class="classLink">
-								<p>${subjectVo.suname}</p>
+							<a href="../list/mystream.do?sucode=${subjectVo.su_code}" class="classLink">
+								<p>${subjectVo.su_name}</p>
 								<c:forEach items="${tList}" var="teacherVo">
-									<p>${teacherVo.tname} 선생님</p>
+									<p>${teacherVo.user_name} 선생님</p>
 								</c:forEach>
 							</a>
 						</c:forEach>
@@ -176,10 +178,10 @@
 				<c:choose>
 					<c:when test="${!empty sSubList}">
 						<c:forEach items="${sSubList}" var="subjectVo">
-							<a href="../list/mystream.do?sucode=${subjectVo.sucode}" class="classLink">
-								<p>${subjectVo.suname}</p>
+							<a href="../list/mystream.do?sucode=${subjectVo.su_code}" class="classLink">
+								<p>${subjectVo.su_name}</p>
 
-								<p>${subjectVo.tname} 선생님
+								<p>${subjectVo.user_name} 선생님
 </p>
 
 							</a>
