@@ -3,4 +3,5 @@
 
 <sqlMapConfig>
 	<sqlMap resource="egovframework/sqlmap/mariadb/mariaMapper/Users_SQL.xml"/>
+	<sqlMap resource="egovframework/sqlmap/mariadb/mariaMapper/Subject_SQL.xml"/>
 </sqlMapConfig>

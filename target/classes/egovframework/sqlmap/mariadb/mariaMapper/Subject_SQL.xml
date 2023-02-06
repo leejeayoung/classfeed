@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Subject">
+
+	<typeAlias  alias="SubjectVo" type="semi.project.domain.SubjectVo"/>
+	
+	<insert id="subjectDAO.inserSubject" parameterClass="SubjectVo">
+		INSERT INTO classfeed.subject
+		(
+			SU_CODE, 
+			USER_ID, 
+			USER_NAME, 
+			SU_NAME, 
+			SSUB_NAME, 
+			KEEP_YN
+		)
+		VALUES
+		(
+			#su_code#,
+			#user_id#, 
+			#user_name#, 
+			#su_name#, 
+			#ssub_name#, 
+			'N'
+		 )
+	</insert>
+	
+	<select id="subjectDAO.selectSubjectByTid" resultClass="SubjectVo" parameterClass="java.lang.String">
+		SELECT 
+			SU_CODE, 
+			USER_ID, 
+			USER_NAME,
+			SU_NAME,
+			SSUB_NAME,
+			KEEP_YN
+		FROM classfeed.subject
+		WHERE 1=1
+		AND user_id = #user_id#
+	</select>
+	
+	<update id="subjectDAO.updateKeepYn" parameterClass="java.util.HashMap">
+		UPDATE classfeed.subject
+		SET KEEP_YN=#keep_yn#
+		WHERE SU_CODE=#su_code#
+	</update>
+	
+	<select id="subjectDAO.selectSubjectKeepList" resultClass="SubjectVo" parameterClass="java.util.HashMap">
+		SELECT 
+			SU_CODE, 
+			USER_ID, 
+			USER_NAME,
+			SU_NAME,
+			SSUB_NAME,
+			KEEP_YN
+		FROM classfeed.subject
+		WHERE 1=1
+		AND user_id = #user_id#
+		AND keep_yn = #keep_yn#
+	</select>
+</sqlMap>

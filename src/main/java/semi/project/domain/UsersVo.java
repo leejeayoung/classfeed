@@ -19,15 +19,16 @@ public class UsersVo implements UserDetails {
 	
 	private static final long serialVersionUID = 1L;
 	
-	private String userId; // 아이디
+	private String user_id;
 	private String password; // 비밀번호
-	private String userName; // 이름
-	private boolean useYn ; // 사용여부
-	private String userEmail; // 학생 메일
-	private String userTel; // 학생 전화번호
-	private int slYn; // 승인 여부
-	private String userAuthority; // 권한
-	private String firstInputIlsi; // 가입날짜
+	private String user_name;	// 이름
+	private String user_type;
+	private boolean use_yn ; // 사용여부
+	private String user_email; // 학생 메일
+	private String user_tel; // 학생 전화번호
+	private String sl_yn; // 승인 여부
+	private String user_authority; // 권한
+	private String first_input_ilsi; // 가입날짜
 	
 	private List<GrantedAuthority> authorities;
 	
@@ -88,6 +89,6 @@ public class UsersVo implements UserDetails {
 	@Override
 	public String getUsername() {
 		// TODO Auto-generated method stub
-		return userId;
+		return user_id;
 	}
 }

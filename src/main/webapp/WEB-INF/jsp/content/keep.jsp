@@ -15,31 +15,31 @@
                             <c:forEach items="${tSubList }" var="subjectVo">
 
                                 <c:choose>
-                                    <c:when test="${subjectVo.skeep == 'Y' }">
+                                    <c:when test="${subjectVo.keep_yn == 'Y' }">
                                         <c:set var="yCnt" value="${yCnt+1}" />
                                     </c:when>
                                 </c:choose>
 
-                                <c:if test="${subjectVo.skeep!= 'N' }">
-                                    <div class="classCard" data-sucode="${subjectVo.sucode}">
-                                        <div class="cardTop codeTransColor_back" data-sucode="${subjectVo.sucode}">
+                                <c:if test="${subjectVo.keep_yn!= 'N' }">
+                                    <div class="classCard" data-sucode="${subjectVo.su_code}">
+                                        <div class="cardTop codeTransColor_back" data-sucode="${subjectVo.su_code}">
                                             <div class="titleWrap">
 
-                                                <a href="../list/mystream.do?sucode=${subjectVo.sucode}" class="title">
-                                                    <p class="tit">${subjectVo.suname}</p>
-                                                    <p class="sub">${subjectVo.ssubname}</p>
+                                                <a href="../list/mystream.do?sucode=${subjectVo.su_code}" class="title">
+                                                    <p class="tit">${subjectVo.su_name}</p>
+                                                    <p class="sub">${subjectVo.ssub_name}</p>
                                                 </a>
                                                 <button class="moreBtn">
                                                     <i class="fas fa-ellipsis-v"></i>
                                                 </button>
                                                 <div class="moreWrap">
-                                                    <a href="keepOff.do?sucode=${subjectVo.sucode }" class="moreAnchor saveClass" data-class="">복원</a>
+                                                    <a href="/main/keepOff.do?su_code=${subjectVo.su_code }" class="moreAnchor saveClass" data-class="">복원</a>
                                                 </div>
 
                                             </div>
                                         </div>
                                         <c:forEach items="${tList}" var="teacherVo">
-                                            <div class="teacherTag">${teacherVo.tname} 선생님</div>
+                                            <div class="teacherTag">${teacherVo.user_name} 선생님</div>
                                         </c:forEach>
                                     </div>
                                 </c:if>
@@ -66,24 +66,24 @@
                         <div class="classCardWrap">
                             <c:forEach items="${sSubList }" var="subjectVo">
                                 <c:choose>
-                                    <c:when test="${subjectVo.skeep == 'Y' }">
+                                    <c:when test="${subjectVo.keep_yn == 'Y' }">
                                         <c:set var="yCnt" value="${yCnt+1}" />
                                     </c:when>
                                 </c:choose>
 
-                                <c:if test="${subjectVo.skeep!= 'N' }">
-                                <div class="classCard" data-sucode="${subjectVo.sucode}">
-                                    <div class="cardTop codeTransColor_back" data-sucode="${subjectVo.sucode}">
+                                <c:if test="${subjectVo.keep_yn!= 'N' }">
+                                <div class="classCard" data-sucode="${subjectVo.su_code}">
+                                    <div class="cardTop codeTransColor_back" data-sucode="${subjectVo.su_code}">
                                         <div class="titleWrap">
 
-                                            <a href="../list/mystream.do?sucode=${subjectVo.sucode}" class="title">
-                                                <p class="tit">${subjectVo.suname}</p>
-                                                <p class="sub">${subjectVo.ssubname}</p>
+                                            <a href="../list/mystream.do?sucode=${subjectVo.su_code}" class="title">
+                                                <p class="tit">${subjectVo.su_name}</p>
+                                                <p class="sub">${subjectVo.ssub_name}</p>
                                             </a>
 
                                         </div>
                                     </div>
-                                    <div class="teacherTag">${subjectVo.tname} 선생님</div>
+                                    <div class="teacherTag">${subjectVo.user_name} 선생님</div>
                                 </div>
                                 </c:if>
                             </c:forEach>

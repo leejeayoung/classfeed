@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
 
-<sqlMap namespace="Sample">
+<sqlMap namespace="user">
 
 	<typeAlias  alias="UsersVo" type="semi.project.domain.UsersVo"/>
 	
@@ -13,6 +13,7 @@
 		SELECT USER_ID
 			,PASSWORD
 			,USER_NAME
+			,USER_TYPE
 			,USE_YN
 			,USER_EMAIL
 			,SL_YN
@@ -20,26 +21,42 @@
 			,FIRST_INPUT_ILSI
 		 FROM users
 		 WHERE 1=1
-		 AND USER_ID=#userId#
+		 AND USER_ID=#user_id#
 	</select>
 	
 	<select id="usersDAO.selectUserIdCheck" parameterClass="java.lang.String" resultClass="int">
 		SELECT count(*)
 		 FROM users
 		 WHERE 1=1
-		 AND USER_ID=#userId#
+		 AND USER_ID=#user_id#
 	</select>
 	
 	<select id="usersDAO.selectUserEmailCheck" parameterClass="java.lang.String" resultClass="int">
 		SELECT count(*)
 		 FROM users
 		 WHERE 1=1
-		 AND USER_Email=#userEmail#
+		 AND USER_Email=#user_email#
 	</select>
 	
 	<insert id="userDAO.inserUser" parameterClass="UsersVo">
 	INSERT INTO classfeed.users
-		(USER_ID, PASSWORD, USER_NAME, USE_YN, USER_EMAIL, SL_YN, USER_TEL, FIRST_INPUT_ILSI)
-	VALUES(#userId#, #password#, #userName#, 'Y', #userEmail#, 'N', #userTel#, DATE_FORMAT(now(), '%Y%m%d%H%i%s'))
+		(USER_ID, PASSWORD, USER_NAME, USER_TYPE,USE_YN, USER_EMAIL, SL_YN, USER_TEL, FIRST_INPUT_ILSI)
+	VALUES(#user_id#, #password#, #user_name#, #user_type#,'Y', #user_email#, 'N', #user_tel#, DATE_FORMAT(now(), '%Y%m%d%H%i%s'))
 	</insert>
+	
+	<select id="usersDAO.selectUserById" parameterClass="java.lang.String" resultClass="UsersVo">
+		SELECT USER_ID
+			,PASSWORD
+			,USER_NAME
+			,USER_TYPE
+			,USE_YN
+			,USER_EMAIL
+			,SL_YN
+			,USER_TEL
+			,FIRST_INPUT_ILSI
+		 FROM users
+		 WHERE 1=1
+		 AND USER_ID=#user_id#
+	</select>
+	
 </sqlMap>

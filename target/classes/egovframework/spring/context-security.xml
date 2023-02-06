@@ -46,6 +46,7 @@
 	</authentication-manager>
 
 	<beans:bean id="userService" class=" semi.project.service.impl.UsersServiceImpl"/>
+	<beans:bean id="subjectService" class=" semi.project.service.impl.SubjectServiceImpl"/>
 	<beans:bean id="userAuthProvider" class="semi.security.CustomAuthenticationProvider"/>
 	<beans:bean id="sucessHandler" class="semi.security.UserLoginSuccessHandler"/>
 	<beans:bean id="bcryptPasswordEncoder"

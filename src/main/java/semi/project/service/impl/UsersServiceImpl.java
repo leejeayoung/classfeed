@@ -58,4 +58,10 @@ public class UsersServiceImpl extends EgovAbstractServiceImpl implements UsersSe
 		usersDAO.insertUser(usersVo);
 	}
 
+	@Override
+	public List<?> selectUserById(String userId) throws Exception {
+		// TODO Auto-generated method stub
+		return usersDAO.selectUserById(userId);
+	}
+
 }
