@@ -44,6 +44,7 @@ public class UserLoginSuccessHandler implements AuthenticationSuccessHandler {
 		}
 		HttpSession session = request.getSession();
 		session.setAttribute("userId", authentication.getName());
+		
 		response.sendRedirect(uri);
 	}
 

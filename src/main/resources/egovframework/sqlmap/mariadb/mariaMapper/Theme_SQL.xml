@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Theme">
+
+	<typeAlias  alias="ThemeVo" type="semi.project.domain.ThemeVo"/>
+	
+	<insert id="themeDAO.insertTheme" parameterClass="ThemeVo">
+		INSERT INTO classfeed.theme
+		(
+			TH_CODE, 
+			USER_ID, 
+			SU_CODE, 
+			TH_NAME, 
+			FIRST_INPUT_ILSI
+		)
+		VALUES
+		(
+			#th_code#, 
+			#user_id#, 
+			#su_code#, 
+			#th_name#, 
+			DATE_FORMAT(NOW(), '%Y%m%d%H%i%s')
+		)
+		 
+	</insert>
+	
+	<select id="themeDAO.selectThemeBySucode" resultClass="ThemeVo" parameterClass="java.lang.String">
+		SELECT 
+			TH_CODE, 
+			USER_ID, 
+			SU_CODE, 
+			TH_NAME, 
+			SUBSTRING(FIRST_INPUT_ILSI, 1, 8) as FIRST_INPUT_ILSI
+		FROM classfeed.theme
+		WHERE 1=1
+		AND su_code = #su_code#
+	</select>
+	
+	<select id="themeDAO.countThemeByThcode" resultClass="int" parameterClass="java.lang.String">
+		SELECT 
+			count(*)
+		FROM classfeed.theme
+		WHERE 1=1
+		AND th_code = #th_code#
+	</select>
+	
+	
+	
+</sqlMap>

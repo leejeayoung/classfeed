@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Board">
+
+	<typeAlias  alias="BoardVo" type="semi.project.domain.BoardVo"/>
+	
+	<insert id="boardDAO.insertBoard" parameterClass="BoardVo">
+		INSERT INTO classfeed.board
+		(
+			USER_ID, 
+			THEME_CD, 
+			BOARD_TITLE, 
+			BOARD_CONTENT, 
+			FIRST_INPUT_ILSI, 
+			BOARD_DEAD_LINE, 
+			BOARD_OFNAME, 
+			BOARD_BFNAME, 
+			BOARD_FSIZE, 
+			SU_CODE
+		)
+		VALUES
+		(
+			#user_id#, 
+			#theme_cd#, 
+			#board_title#, 
+			#board_content#, 
+			DATE_FORMAT(NOW(), '%Y%m%d%H%i%s'),
+			#board_dead_line#, 
+			#board_ofname#, 
+			#board_bfname#, 
+			#board_fsize#, 
+			#su_code#							
+		)	
+	</insert>
+	
+	<select id="boardDAO.selectBoardBySucode" resultClass="BoardVo" parameterClass="java.lang.String">
+		SELECT 
+			BOARD_SEQ, 
+			USER_ID, 
+			THEME_CD, 
+			BOARD_TITLE, 
+			BOARD_CONTENT, 
+			SUBSTRING(FIRST_INPUT_ILSI, 1, 8) as FIRST_INPUT_ILSI,
+			BOARD_DEAD_LINE, 
+			BOARD_OFNAME, 
+			BOARD_BFNAME, 
+			BOARD_FSIZE, 
+			SU_CODE
+		FROM classfeed.board
+		WHERE 1=1
+		AND SU_CODE = #su_code#
+	</select>
+
+</sqlMap>

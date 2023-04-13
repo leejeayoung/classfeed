@@ -14,8 +14,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="_csrf" content="${_csrf.token}">
 	<meta name="_csrf_header" content="${_csrf.headerName}">
-	<link rel="shortcut icon" href="../img/favicon.ico" type="image/x-icon">
-	<link rel="icon" href="../img/favicon.ico" type="image/x-icon">
+	<link rel="shortcut icon" href="../../../img/favicon.ico" type="image/x-icon">
+	<link rel="icon" href="../../../img/favicon.ico" type="image/x-icon">
 	<title>CLASSFEED | ${param.title}</title>
 
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -23,9 +23,9 @@
 	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
 
 	<script src="https://kit.fontawesome.com/5a210d3256.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="../css/common.css?v=<%= sf.format(nowTime) %>">
-    <link rel="stylesheet" href="../css/sign.css?v=<%= sf.format(nowTime) %>">
-    <script src="../js/common.js?v=<%= sf.format(nowTime) %>"></script>
+    <link rel="stylesheet" href="../../../css/common.css?v=<%= sf.format(nowTime) %>">
+    <link rel="stylesheet" href="../../../css/sign.css?v=<%= sf.format(nowTime) %>">
+    <script src="../../../js/common.js?v=<%= sf.format(nowTime) %>"></script>
 </head>
 <body>
 

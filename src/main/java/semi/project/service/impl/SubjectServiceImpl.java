@@ -46,6 +46,18 @@ public class SubjectServiceImpl extends EgovAbstractServiceImpl implements Subje
 		// TODO Auto-generated method stub
 		subjectDAO.updateKeepYn(map);
 	}
+
+	@Override
+	public int selectSearchCount(String su_code) throws Exception {
+		// TODO Auto-generated method stub
+		return subjectDAO.selectSearchCount(su_code);
+	}
+
+	@Override
+	public List<?> selectSubjectBySucode(String su_code) throws Exception {
+		// TODO Auto-generated method stub
+		return subjectDAO.selectSubjectBySucode(su_code);
+	}
 	
 	
 

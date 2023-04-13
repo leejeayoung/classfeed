@@ -16,5 +16,6 @@ public interface SubjectService {
 	List<?> selectSubjectByTid(String user_id) throws Exception; // 클래스 조회
 	List<?> selectSubjectKeepList(HashMap<String, Object> map) throws Exception; // 보관함 조회
 	void updateKeepYn(HashMap<String, Object> map) throws Exception;	//보관
-	
+	int selectSearchCount(String su_code) throws Exception; 	// 수업여부
+	List<?> selectSubjectBySucode(String su_code) throws Exception;
 }

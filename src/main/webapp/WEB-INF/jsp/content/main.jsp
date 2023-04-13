@@ -27,7 +27,7 @@
 										<div class="cardTop codeTransColor_back" data-sucode="${subjectVo.su_code}">
 											<div class="titleWrap">
 
-												<a href="../list/mystream.do?sucode=${subjectVo.su_code}" class="title">
+												<a href="/list/mystream.do?su_code=${subjectVo.su_code}&&user_type=${user_type}" class="title">
 													<p class="tit">${subjectVo.su_name}</p>
 													<p class="sub">${subjectVo.ssub_name}</p>
 												</a>
@@ -94,7 +94,7 @@
 									<div class="cardTop codeTransColor_back" data-sucode="${subjectVo.su_code}">
 										<div class="titleWrap">
 
-											<a href="/list/mystream.do?su_code=${subjectVo.su_code}" class="title">
+											<a href="/list/mystream.do?su_code=${subjectVo.su_code}&&user_type=${user_type}" class="title">
 												<p class="tit">${subjectVo.su_name}</p>
 												<p class="sub">${subjectVo.ssub_name}</p>
 											</a>
@@ -374,13 +374,14 @@
 					<span>클래스 참여</span>
 					<i class="fas fa-times modalClose"></i>
 				</p>
-				<form action="../subject/class.do" method="post">
+				<form action="/subject/class.do" method="post">
 					<c:forEach items="${sList}" var="studentVo">
-						<input type="hidden" name="sid" value="${studentVo.user_id}">
+						<input type="hidden" name="user_id" value="${studentVo.user_id}">
+						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 					</c:forEach>
 					<p class="subTitle">인증코드 입력</p>
 					<div class="inpWrap">
-						<input type="text" name="sucode" class="inp" required>
+						<input type="text" name="su_code" class="inp" required>
 						<div class="inpBar"></div>
 					</div>
 					<p class="msg">* 인증코드는 영문 혹은 숫자 조합이며, 대소문자를 구분합니다.</p>

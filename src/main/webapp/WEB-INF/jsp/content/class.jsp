@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -8,27 +10,27 @@
 <div class="contentWrap">
     <div class="innerWrap">
         <div class="conTabWarp">
-            <a href="../list/mystream.do?sucode=${sucode}" class="conTab">스트림</a>
-            <a href="../list/myclass.do?sucode=${sucode}" class="conTab on codeTransColor_color codeTransColor_border" data-sucode="${sucode}">수업</a>
+            <a href="/list/mystream.do?su_code=${su_code}&&user_type=${user_type}" class="conTab">스트림</a>
+            <a href="/list/myclass.do?su_code=${su_code}&&user_type=${user_type}" class="conTab on codeTransColor_color codeTransColor_border" data-sucode="${su_code}">수업</a>
         </div>
 
         
-        <div class="titleBox codeTransColor_back" data-sucode="${sucode}">
+        <div class="titleBox codeTransColor_back" data-sucode="${su_code}">
             <c:forEach items="${subList}" var="subjectVo">
-                <p class="title">${subjectVo.suname}</p>
-                <p class="school">${subjectVo.ssubname}</p>
-                <p class="teacher">${subjectVo.tname} 선생님</p>
+                <p class="title">${subjectVo.su_name}</p>
+                <p class="school">${subjectVo.ssub_name}</p>
+                <p class="teacher">${subjectVo.user_name} 선생님</p>
             </c:forEach>
         </div>
 
         <div class="classConBox">
             <div class="classConLeft">
-                <div class="themeLink on codeTransColor_back thCodeTab" data-sucode="${sucode}" data-thcode="">
+                <div class="themeLink on codeTransColor_back thCodeTab" data-sucode="${su_code}" data-thcode="">
                     <p>모든 주제</p>
                 </div>
                 <c:forEach items="${thlist}" var="themeVo">
-                    <div class="themeLink codeTransColor_back thCodeTab" data-sucode="${sucode}" data-thcode="${themeVo.thcode}">
-                        <p>${themeVo.thname}</p>
+                    <div class="themeLink codeTransColor_back thCodeTab" data-sucode="${su_code}" data-thcode="${themeVo.th_code}">
+                        <p>${themeVo.th_name}</p>
                     </div>
                 </c:forEach>
                 
@@ -57,14 +59,14 @@
                 </c:if>
 
                 <c:forEach items="${thlist}" var="themeVo">
-                <div class="themeTitle codeTransColor_border codeTransColor_back thCodeBlock thCodeTitle" data-thcode="${themeVo.thcode}" data-sucode="${sucode}">
-                    <p>${themeVo.thname}</p>
+                <div class="themeTitle codeTransColor_border codeTransColor_back thCodeBlock thCodeTitle" data-thcode="${themeVo.th_code}" data-sucode="${su_code}">
+                    <p>${themeVo.th_name}</p>
                 </div>
                 <c:forEach items="${blist}" var="boardVo">
-                    <c:if test="${themeVo.thcode==boardVo.thcode}">
-                        <div class="classSomeLinkWrap codeTransColor_back thCodeBlock" data-thcode="${themeVo.thcode}"" data-sucode="${sucode}">
+                    <c:if test="${themeVo.th_code==boardVo.th_code}">
+                        <div class="classSomeLinkWrap codeTransColor_back thCodeBlock" data-thcode="${themeVo.th_code}"" data-sucode="${su_code}">
                             <div class="classSomeLink">
-                                <div class="iconCircle codeTransColor_back" data-sucode="${sucode}">
+                                <div class="iconCircle codeTransColor_back" data-sucode="${su_code}">
                                     <c:choose>
                                         <c:when test="${empty boardVo.bdeadline}">
                                             <i class="far fa-file-alt" aria-hidden="true"></i>
@@ -83,10 +85,10 @@
                                         <div class="moreWrap">
                                             <c:choose>
                                                <c:when test="${empty boardVo.bdeadline}">
-                                                    <a href="javascript:void(0)" class="editBtn modalBtn" data-modal="editStudyFile" data-bseq="${boardVo.bseq}" data-btitle="${boardVo.btitle}" data-bcontent="${boardVo.bcontent}" data-thcode="${boardVo.thcode}">수정</a>
+                                                    <a href="javascript:void(0)" class="editBtn modalBtn" data-modal="editStudyFile" data-bseq="${boardVo.bseq}" data-btitle="${boardVo.btitle}" data-bcontent="${boardVo.bcontent}" data-thcode="${boardVo.th_code}">수정</a>
                                                 </c:when>
                                                 <c:when test="${!empty boardVo.bdeadline}">
-                                                    <a href="javascript:void(0)" class="editBtn modalBtn" data-modal="editAssignment" data-bseq="${boardVo.bseq}" data-btitle="${boardVo.btitle}" data-bcontent="${boardVo.bcontent}" data-thcode="${boardVo.thcode}">수정</a>
+                                                    <a href="javascript:void(0)" class="editBtn modalBtn" data-modal="editAssignment" data-bseq="${boardVo.bseq}" data-btitle="${boardVo.btitle}" data-bcontent="${boardVo.bcontent}" data-thcode="${boardVo.th_code}">수정</a>
                                                 </c:when>
                                             </c:choose>
                                             
@@ -109,14 +111,14 @@
     <div class="modalWrap" data-modal="addAssignment">
         <div class="modalCon" style="width:500px; max-height: 1000px;">
             <p class="modalTitle">
-                <span class="codeTransColor_border" data-sucode="${sucode}">과제 만들기</span>
+                <span class="codeTransColor_border" data-sucode="${su_code}">과제 만들기</span>
                 <i class="fas fa-times modalClose"></i>
             </p>
             <form action="/myboard/assignin.do" method="post" enctype="multipart/form-data">
                 <c:forEach items="${tList}" var="teacherVo">
-                    <input type="hidden" name="tid" value="${teacherVo.tid}">
+                    <input type="hidden" name="tid" value="${teacherVo.user_id}">
                 </c:forEach>
-                <input type="hidden" name="sucode" value="${sucode}">
+                <input type="hidden" name="su_code" value="${su_code}">
                 <p class="subTitle">제목</p>
                 <div class="inpWrap">
                     <input type="text" name="btitle" class="inp" required>
@@ -142,7 +144,7 @@
                     </select>
                     <select name="themelist" class="selectWrap">
                         <c:forEach items="${thlist}" var="themeVo">
-                            <option value="${themeVo.thcode}">${themeVo.thname}</option>
+                            <option value="${themeVo.th_code}">${themeVo.th_name}</option>
                         </c:forEach>
                     </select>
                 </div>
@@ -158,7 +160,7 @@
     
     
                 <div class="btnWrap">
-                    <button type="submit" class="adMissionBtn pointBtn codeTransColor_back" data-sucode="${sucode}">등록</button>
+                    <button type="submit" class="adMissionBtn pointBtn codeTransColor_back" data-sucode="${su_code}">등록</button>
                 </div>
     
             </form>
@@ -167,7 +169,7 @@
     <div class="modalWrap" data-modal="addStudyFile">
         <div class="modalCon" style="width:500px; max-height: 1000px;">
             <p class="modalTitle">
-                <span class="codeTransColor_border" data-sucode="${sucode}">자료 올리기</span>
+                <span class="codeTransColor_border" data-sucode="${su_code}">자료 올리기</span>
                 <i class="fas fa-times modalClose"></i>
             </p>
             <form action="/myboard/boardin.do" method="post" enctype="multipart/form-data">
@@ -187,7 +189,7 @@
 
                 <select name="themelist" class="selectWrap">
                     <c:forEach items="${thlist}" var="themeVo">
-                        <option value="${themeVo.thcode}">${themeVo.thname}</option>
+                        <option value="${themeVo.th_code}">${themeVo.th_name}</option>
                     </c:forEach>
                 </select>
     
@@ -202,7 +204,7 @@
     
     
                 <div class="btnWrap">
-                    <button type="submit" class="adMissionBtn pointBtn codeTransColor_back" data-sucode="${sucode}">등록</button>
+                    <button type="submit" class="adMissionBtn pointBtn codeTransColor_back" data-sucode="${su_code}">등록</button>
                 </div>
     
             </form>
@@ -211,23 +213,23 @@
     <div class="modalWrap" data-modal="addTheme">
         <div class="modalCon" style="width:300px; max-height: 1000px;">
             <p class="modalTitle">
-                <span class="codeTransColor_border" data-sucode="${sucode}">주제 만들기</span>
+                <span class="codeTransColor_border" data-sucode="${su_code}">주제 만들기</span>
                 <i class="fas fa-times modalClose"></i>
             </p>
             <form action="/list/theme.do" method="post">
                 <c:forEach items="${tList}" var="teacherVo">
-                    <input type="hidden" name="tid" value="${teacherVo.tid}">
+                    <input type="hidden" name=user_id value="${teacherVo.user_id}">
                 </c:forEach>
-                <input type="hidden" name="sucode" value="${sucode}">
-                
+                <input type="hidden" name="su_code" value="${su_code}">
+                <input type="hidden" name = "${_csrf.parameterName}" value="${_csrf.token}">
                 <p class="subTitle">주제명</p>
                 <div class="inpWrap">
-                    <input type="text" name="thname" class="inp" required>
+                    <input type="text" name="th_name" class="inp" required>
                     <div class="inpBar"></div>
                 </div>
     
                 <div class="btnWrap">
-                    <button type="submit" class="adMissionBtn pointBtn codeTransColor_back" data-sucode="${sucode}">등록</button>
+                    <button type="submit" class="adMissionBtn pointBtn codeTransColor_back" data-sucode="${su_code}">등록</button>
                 </div>
     
             </form>
@@ -238,14 +240,14 @@
     <div class="modalWrap" data-modal="editAssignment">
         <div class="modalCon" style="width:500px; max-height: 1000px;">
             <p class="modalTitle">
-                <span class="codeTransColor_border" data-sucode="${sucode}">과제 수정하기</span>
+                <span class="codeTransColor_border" data-sucode="${su_code}">과제 수정하기</span>
                 <i class="fas fa-times modalClose"></i>
             </p>
             <form action="../myboard/update.do" method="post" enctype="multipart/form-data">
                 <c:forEach items="${tList}" var="teacherVo">
-                    <input type="hidden" name="tid" value="${teacherVo.tid}">
+                    <input type="hidden" name="tid" value="${teacherVo.user_id}">
                 </c:forEach>
-                <input type="hidden" name="sucode" value="${sucode}">
+                <input type="hidden" name="sucode" value="${su_code}">
                 <input type="hidden" class="bseq" name="bseq" value="">
                 <p class="subTitle">제목</p>
                 <div class="inpWrap">
@@ -262,13 +264,13 @@
                 <p class="subTitle">주제</p>
                 <select name="themelist" class="selectWrap thcode">
                     <c:forEach items="${thlist}" var="themeVo">
-                        <option value="${themeVo.thcode}">${themeVo.thname}</option>
+                        <option value="${themeVo.th_code}">${themeVo.th_name}</option>
                     </c:forEach>
                 </select>
     
     
                 <div class="btnWrap">
-                    <button type="submit" class="adMissionBtn pointBtn codeTransColor_back" data-sucode="${sucode}">수정하기</button>
+                    <button type="submit" class="adMissionBtn pointBtn codeTransColor_back" data-sucode="${su_code}">수정하기</button>
                 </div>
     
             </form>
@@ -277,14 +279,14 @@
     <div class="modalWrap" data-modal="editStudyFile">
         <div class="modalCon" style="width:500px; max-height: 1000px;">
             <p class="modalTitle">
-                <span class="codeTransColor_border" data-sucode="${sucode}">자료 수정하기</span>
+                <span class="codeTransColor_border" data-sucode="${su_code}">자료 수정하기</span>
                 <i class="fas fa-times modalClose"></i>
             </p>
             <form action="../myboard/update.do" method="post" enctype="multipart/form-data">
                 <c:forEach items="${tList}" var="teacherVo">
-                    <input type="hidden" name="tid" value="${teacherVo.tid}">
+                    <input type="hidden" name="tid" value="${teacherVo.user_id}">
                 </c:forEach>
-                <input type="hidden" name="sucode" value="${sucode}">
+                <input type="hidden" name="su_code" value="${su_code}">
                 <input type="hidden" class="bseq" name="bseq" value="">
                 <p class="subTitle">제목</p>
                 <div class="inpWrap">
@@ -301,12 +303,12 @@
                 <p class="subTitle">주제</p>
                 <select name="themelist" class="selectWrap thcode">
                     <c:forEach items="${thlist}" var="themeVo">
-                        <option value="${themeVo.thcode}">${themeVo.thname}</option>
+                        <option value="${themeVo.th_code}">${themeVo.th_name}</option>
                     </c:forEach>
                 </select>
     
                 <div class="btnWrap">
-                    <button type="submit" class="adMissionBtn pointBtn codeTransColor_back" data-sucode="${sucode}">수정하기</button>
+                    <button type="submit" class="adMissionBtn pointBtn codeTransColor_back" data-sucode="${su_code}">수정하기</button>
                 </div>
     
             </form>

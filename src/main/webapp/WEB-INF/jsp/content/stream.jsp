@@ -10,15 +10,15 @@
 <div class="contentWrap">
     <div class="innerWrap">
         <div class="conTabWarp">
-            <a href="../list/mystream.do?sucode=${sucode}" class="conTab on codeTransColor_color codeTransColor_border" data-sucode="${sucode}">스트림</a>
-            <a href="../list/myclass.do?sucode=${sucode}" class="conTab">수업</a>
+            <a href="/list/mystream.do?su_code=${su_code}&&user_type=${user_type}" class="conTab on codeTransColor_color codeTransColor_border" data-sucode="${su_code}">스트림</a>
+            <a href="/list/myclass.do?su_code=${su_code}&&user_type=${user_type}" class="conTab">수업</a>
         </div>
 
-        <div class="titleBox codeTransColor_back" data-sucode="${sucode}">
+        <div class="titleBox codeTransColor_back" data-sucode="${su_code}">
             <c:forEach items="${subList}" var="subjectVo">
-                <p class="title">${subjectVo.suname}</p>
-                <p class="school">${subjectVo.ssubname}</p>
-                <p class="teacher">${subjectVo.tname} 선생님</p>
+                <p class="title">${subjectVo.su_name}</p>
+                <p class="school">${subjectVo.ssub_name}</p>
+                <p class="teacher">${subjectVo.user_name} 선생님</p>
             </c:forEach>
         </div>
         <div class="streamConBox">
@@ -57,11 +57,12 @@
                     <p class="title">학생들에게 공지할 내용을 입력하세요.</p>
 
                     <div class="textAreaWrap">
-                        <form action="../list/notice.do" method="post">
+                        <form action="/list/notice.do" method="post">
                         <textarea name="ncontent" placeholder="공지내용을 입력해주세요."></textarea>
                         <div class="btnWrap">
                             <button class="cancleBtn" type="reset">취소</button>
-                            <button class="submitBtn codeTransColor_back" data-sucode="${sucode}" type="submit">등록</button>
+                            <button class="submitBtn codeTransColor_back" data-sucode="${su_code}" type="submit">등록</button>
+                            <input type="hidden" name = "${_csrf.parameterName}" value="${_csrf.token}">
                         </div>
                         </form>
                     </div>
@@ -74,14 +75,20 @@
                     <c:when test="${!empty noticeList}">
                         <c:forEach items="${noticeList}" var="noticeVo">
                             <div class="streamCard">
-                                <div class="iconCircle codeTransColor_back" data-sucode="${sucode}">
+                                <div class="iconCircle codeTransColor_back" data-sucode="${su_code}">
                                     <i class="fas fa-bullhorn"></i>
                                 </div>
                                 <a href="javascript:void(0)" class="text" style="text-decoration: none; cursor: default;">
-                                    <p class="title">${noticeVo.sid} </p>
-                                    <p class="title">${noticeVo.tid} </p>
-                                    <p class="date">${noticeVo.nrdate}</p>
-                                    <pre class="content">${noticeVo.ncontent}</pre>
+                                    <%-- <p class="title">${noticeVo.user_id} </p> --%>
+                                    <c:if test="${noticeVo.user_type eq 'teacher' }">
+                                    	<p class="title">${noticeVo.user_name} 선생님</p>
+                                    </c:if>
+                                    <c:if test="${noticeVo.user_type eq 'student' }">
+                                    	<p class="title">${noticeVo.user_name} 학생</p>
+                                    </c:if>
+                                    
+                                    <p class="date">${noticeVo.first_input_ilsi}</p>
+                                    <pre class="content">${noticeVo.notice_content}</pre>
                                 </a>
                                 
 
@@ -90,13 +97,13 @@
                                 <c:choose>
                                     <c:when test="${!empty tList}">
                                         <c:forEach items="${tList}" var="teacherVo">
-                                            <c:if test="${teacherVo.tid == noticeVo.tid}">
+                                            <c:if test="${teacherVo.user_id == noticeVo.user_id}">
                                                 <div class="moreBtnWrap">
                                                     <button class="moreBtn">
                                                         <i class="fas fa-ellipsis-v"></i>
                                                     </button>
                                                     <div class="moreWrap">
-                                                        <a href="noticeDel.do?nseq=${noticeVo.nseq}" class="moreAnchor deleteClass" data-class="" style="top:55px">삭제</a>
+                                                        <a href="noticeDel.do?nseq=${noticeVo.notice_seq}" class="moreAnchor deleteClass" data-class="" style="top:55px">삭제</a>
                                                     </div>
                                                 </div>
                                             </c:if>
@@ -104,7 +111,7 @@
                                     </c:when>
                                     <c:when test="${!empty sList}">
                                         <c:forEach items="${sList}" var="studentVo">
-                                            <c:if test="${studentVo.sid == noticeVo.sid}">
+                                            <c:if test="${studentVo.user_id == noticeVo.user_id}">
                                                 <div class="moreBtnWrap">
                                                     <button class="moreBtn">
                                                         <i class="fas fa-ellipsis-v"></i>
@@ -131,7 +138,7 @@
 
 
                             <div class="streamCard">
-                                <div class="iconCircle codeTransColor_back" data-sucode="${sucode}">
+                                <div class="iconCircle codeTransColor_back" data-sucode="${su_code}">
                                     <c:choose>
                                         <c:when test="${empty boardVo.bdeadline}">
                                             <i class="far fa-file-alt" aria-hidden="true"></i>
@@ -144,7 +151,7 @@
                                     </c:choose>
                                 </div>
                                 <a href="../myboard/content.do?bseq=${boardVo.bseq}" class="text">
-                                    <p class="title">${boardVo.tid} 님이 새 ${boardType}을 게시 : ${boardVo.btitle}</p>
+                                    <p class="title">${boardVo.user_id} 님이 새 ${boardType}을 게시 : ${boardVo.btitle}</p>
                                     <p class="date">${boardVo.brdate}</p>
                                 </a>
 

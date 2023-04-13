@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Class">
+
+	<typeAlias  alias="ClassVo" type="semi.project.domain.ClassVo"/>
+	
+	<insert id="classDAO.inserSubject" parameterClass="ClassVo">
+		INSERT INTO classfeed.class
+		(
+			SU_CODE, 
+			USER_ID 
+		)
+		VALUES
+		(
+			#su_code#,
+			#user_id# 
+		 )
+	</insert>
+	
+	<select id="classDAO.selectClassBySid" resultClass="ClassVo" parameterClass="java.lang.String">
+		SELECT 
+			c.SU_CODE, 
+			c.USER_ID,
+			s.USER_NAME,
+			s.SU_NAME,
+			s.SSUB_NAME,
+			s.KEEP_YN
+		FROM classfeed.class c
+		inner join classfeed.subject s 
+				on c.SU_CODE = s.SU_CODE 
+		WHERE 1=1
+		AND c.USER_ID = #user_id#
+	</select>
+	
+	<select id="classDAO.selectSucodeBySid" resultClass="ClassVo" parameterClass="java.lang.String">
+		SELECT 
+			c.SU_CODE 
+		FROM classfeed.class c
+		WHERE 1=1
+		AND c.USER_ID = #user_id#
+	</select>
+
+</sqlMap>

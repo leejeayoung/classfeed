@@ -47,6 +47,10 @@
 
 	<beans:bean id="userService" class=" semi.project.service.impl.UsersServiceImpl"/>
 	<beans:bean id="subjectService" class=" semi.project.service.impl.SubjectServiceImpl"/>
+	<beans:bean id="classService" class=" semi.project.service.impl.ClassServiceImpl"/>
+	<beans:bean id="boardService" class=" semi.project.service.impl.BoardServiceImpl"/>
+	<beans:bean id="noticeService" class=" semi.project.service.impl.NoticeServiceImpl"/>
+	<beans:bean id="themeService" class=" semi.project.service.impl.ThemeServiceImpl"/>
 	<beans:bean id="userAuthProvider" class="semi.security.CustomAuthenticationProvider"/>
 	<beans:bean id="sucessHandler" class="semi.security.UserLoginSuccessHandler"/>
 	<beans:bean id="bcryptPasswordEncoder"

@@ -27,4 +27,16 @@ public class SubjectDAO extends EgovAbstractDAO{
 	public void updateKeepYn(HashMap<String, Object> map) throws Exception{
 		update("subjectDAO.updateKeepYn",map);
 	}
+	
+	public int selectSearchCount(String su_code) throws Exception {
+		//String rStr = select("subjectDAO.selectSearchCount", su_code);
+		//int rInt = Integer.parseInt((String) rStr);
+		return (int) select("subjectDAO.selectSearchCount", su_code);
+	}
+	
+	public List<?> selectSubjectBySucode(String su_code) throws Exception {
+		return list("subjectDAO.selectSubjectBySucode", su_code);
+	}
+	
+	
 }

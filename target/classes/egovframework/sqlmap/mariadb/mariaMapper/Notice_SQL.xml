@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Notice">
+
+	<typeAlias  alias="NoticeVo" type="semi.project.domain.NoticeVo"/>
+	
+	<insert id="noticeDAO.insertNotice" parameterClass="NoticeVo">
+		INSERT INTO classfeed.notice
+		(
+			FIRST_INPUT_ILSI, 
+			NOTICE_CONTENT, 
+			USER_ID, 
+			SU_CODE
+		)
+		VALUES
+		(
+			DATE_FORMAT(NOW(), '%Y%m%d%H%i%s'), 
+			#notice_content#, 
+			#user_id#, 
+			#su_code#
+		);
+	
+	</insert>
+	
+	<select id="boardDAO.selectNoticeBySucode" resultClass="NoticeVo" parameterClass="java.lang.String">
+		SELECT 
+			c.NOTICE_SEQ, 
+			DATE_FORMAT(STR_TO_DATE((SUBSTRING(c.FIRST_INPUT_ILSI, 1, 8)), '%Y%m%d'), '%Y-%m-%d') as FIRST_INPUT_ILSI, 
+			c.NOTICE_CONTENT, 
+			c.USER_ID, 
+			c.SU_CODE,
+			u.USER_NAME,
+			u.USER_TYPE
+		FROM classfeed.notice c
+		inner join classfeed.users u 
+				on c.USER_ID = u.USER_ID 
+		WHERE 1=1
+		AND SU_CODE = #su_code#
+
+	</select>
+
+</sqlMap>

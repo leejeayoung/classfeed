@@ -89,11 +89,11 @@
         height: 42px;
         display: flex;
         align-items: center;
-        box-shadow: 0px 0px 4px rgba(0,0,0,0.1);
         border-radius: 100px;
         justify-content: center;
         overflow: hidden;
-        margin-left: 30px;
+        margin-left: 20px;
+        margin-right: 10px;
     }
     .rightBtnWrap .mypageLink img{
         width: 100%;
@@ -281,7 +281,7 @@
         margin-top: 20px;
         padding: 12px 20px;
         justify-content: space-between;
-        transition: .1s ease-in-out;
+        transition: .2s ease-in-out;
     }
     .mainLink:hover {
         margin-right: 5px;
@@ -593,6 +593,7 @@
         padding:58px 70px;
         padding-right: 0px;
     }
+    
     .contentInnerWrap {
         width: 100%;
         background-color: transparent;
@@ -657,50 +658,9 @@
         width: 240px;
         margin-top:4px;
     }
-    .classCard .titleWrap .moreBtn{
-        width: 30px;
-        height: 30px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 100px;
-        flex-shrink: 0;
-        cursor: pointer;
-        background-color: transparent;
-        transition: .2s ease-in-out;
-    }
-    .classCard .titleWrap .moreBtn:hover{
-        background-color: rgba(0,0,0,0.2);
-    }
     .classCard .titleWrap .moreBtn>i{
         color:#fff;
         font-size: 18px;
-    }
-    .classCard .titleWrap .moreWrap{
-        position: absolute;
-        z-index: 1;
-        height: auto;
-        background-color:rgba(0,0,0,0.7);
-        border-radius: 4px;
-        overflow: hidden;
-        right: -28px;
-        top: 44px;
-        padding:5px 0px;
-        transform: scale(0);
-        transform-origin:top left;
-        transition: .3s ease-in-out;
-    }
-    .classCard .titleWrap .moreWrap.on{
-        transform: scale(1);
-    }
-    .classCard .titleWrap .moreWrap a{
-        display: block;
-        padding:5px 15px;
-        color:#fff;
-        font-size: 13px;
-    }
-    .classCard .titleWrap .moreWrap a:hover{
-        text-decoration: underline;
     }
     .classCard .teacherTag {
         background-color: #fff;
@@ -726,7 +686,9 @@
         padding-top:3px;
         cursor: pointer;
         height: 28px;
-        width: 100px;
+        width: 110px;
+        display: flex;
+        justify-content: center;
     }
     .classCard .classCode>div {
         width: 80px;
@@ -823,18 +785,39 @@
     }
     .homeWorkBox .title {
         font-size: 16px;
+        padding-bottom:10px;
     }
     .homeWorkBox .noWork {
         color:#888;
-        margin-top:10px;
-        margin-bottom:20px;
+        margin-bottom:10px;
+    }
+    .homeWorkBox .nowDateLink {
+        display: block;
+        padding: 10px 0px;
+        border-top: 1px solid #ccc;
+    }
+    .homeWorkBox .nowDateLink:hover * {
+        text-decoration: underline;
+    }
+    .homeWorkBox .nowDateLink b {
+        display: block;
+        width: 100%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        margin-bottom: 5px;
+    }
+    .homeWorkBox .nowDateLink span {
+        display: block;
+        font-size: 12px;
+        color: #aaa;
+        margin-bottom: 5px;
     }
     .streamCardWrap {
         width: 100%;
         flex-shrink: 1;
         margin-left: 20px;;
-    }
-    .streamCard {
+    }.streamCard {
         background-color: #fff;
         border:1px solid #ececec;
         border-radius: 10px;
@@ -892,7 +875,7 @@
     .streamCard.noticeCard.on .textAreaWrap {
         display: block;
     }
-    .textAreaWrap>textarea{
+    .textAreaWrap textarea{
         width: 100%;
         margin-bottom:10px;
         border:0;
@@ -901,7 +884,7 @@
         resize:vertical;
         border-radius: 4px 4px 0px 0px;
     }
-    .textAreaWrap>textarea:focus-visible{
+    .textAreaWrap textarea:focus-visible{
         outline: none;
     }
     .textAreaWrap .btnWrap {
@@ -928,50 +911,6 @@
     .textAreaWrap .btnWrap>.submitBtn{
         color:#fff;
     }
-    .streamCard .moreBtn{
-        width: 30px;
-        height: 30px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 100px;
-        flex-shrink: 0;
-        cursor: pointer;
-        background-color: transparent;
-        transition: .2s ease-in-out;
-    }
-    .streamCard .moreBtn:hover{
-        background-color: rgba(0,0,0,0.2);
-    }
-    .streamCard .moreBtn>i{
-        font-size: 18px;
-    }
-    .streamCard .moreWrap{
-        position: absolute;
-        z-index: 1;
-        height: auto;
-        background-color:rgba(0,0,0,0.7);
-        border-radius: 4px;
-        overflow: hidden;
-        right: -28px;
-        top: 44px;
-        padding:5px 0px;
-        transform: scale(0);
-        transform-origin:top left;
-        transition: .5s ease-in-out;
-    }
-    .streamCard .moreWrap.on{
-        transform: scale(1);
-    }
-    .streamCard .moreWrap a{
-        display: block;
-        padding:5px 15px;
-        color:#fff;
-        font-size: 13px;
-    }
-    .streamCard .moreWrap a:hover{
-        text-decoration: underline;
-    }
     .streamCard .text {
         width: 100%;
         flex-shrink: 1;
@@ -991,29 +930,502 @@
         overflow: hidden;
         white-space: nowrap;
     }
-    .noClassWrap {
-        background-color: #fff;
-        border-radius: 10px;
-        padding: 70px;
+
+    .modalWrap .doubleRow{
+        display: flex;
+        justify-content: space-between;
+
+    }
+    .modalWrap .doubleRow>.subTitle{
+        width: 100%;
+
+    }
+    .modalWrap .doubleRow>.subTitle + .subTitle{
+        margin-left: 30px;
+    }
+    .selectWrap {
+        border: 1px solid #dfdfdf;
+        border-radius: 5px;
+        display: block;
+        width: 100%;
+        height: 38px;
+        
+        padding: 0px 8px;
+        color: #555;
+    }
+    .modalWrap .doubleRow>.selectWrap + .selectWrap{
+        margin-left: 30px;
+    }
+    .modalWrap .fileBtn {
         display: flex;
         justify-content: center;
-        flex-wrap: wrap;
-        border:1px solid #ececec;
-    }
-    .noClassWrap>svg{
-        width: 300px;
-        flex-shrink: 0;
-    }
-    .noClassWrap>p{
-        text-align: center;
-        flex-shrink: 0;
-        width: 100%;
         margin-top: 20px;
+        align-items: center;
+        padding: 8px;
+        border: 1px solid #dfdfdf;
+        width: 130px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: .3s ease-in-out;
+    }
+    .modalWrap .fileBtn:hover {
+        background-color: #f2f2f2;
+    }
+    .modalWrap .fileBtn >i {
+        margin-right: 4px;
+        margin-top:2px;
+
+    }
+    .modalWrap .fileSpace {
+        display: flex;
+        align-items: center;
+        background-color: #f2f2f2;
+        border-radius: 100px;
+        padding:8px 16px;
+        width: fit-content;
+        margin-top:20px;
+        display: none;
+    }
+    .modalWrap .fileSpace>i {
+        margin-left: 10px;
+        margin-top:2px;
+        cursor: pointer;
+    }
+    .modalWrap .fileSpace > span{
+        display: inline-block;
+        max-width: 300px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+    }
+
+
+    .modalWrap .fileBtn2 {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+        align-items: center;
+        padding: 8px;
+        border: 1px solid #dfdfdf;
+        width: 130px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: .3s ease-in-out;
+    }
+    .modalWrap .fileBtn2:hover {
+        background-color: #f2f2f2;
+    }
+    .modalWrap .fileBtn2 >i {
+        margin-right: 4px;
+        margin-top:2px;
+
+    }
+    .modalWrap .fileSpace2 {
+        display: flex;
+        align-items: center;
+        background-color: #f2f2f2;
+        border-radius: 100px;
+        padding:8px 16px;
+        width: fit-content;
+        margin-top:20px;
+        display: none;
+    }
+    .modalWrap .fileSpace2>i {
+        margin-left: 10px;
+        margin-top:2px;
+        cursor: pointer;
+    }
+    .modalWrap .fileSpace2 > span{
+        display: inline-block;
+        max-width: 300px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+    }
+
+
+
+    
+
+    .classConBox  {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
+        align-items: flex-start;
+        background-color: #fff;
+        padding: 20px;
+        border: 1px solid #ececec;
+        border-radius: 10px;
+    }
+    .classConBox .classConLeft {
+        width: 180px;
+        flex-shrink: 0;
+    }
+    .classConBox .classConLeft .themeLink {
+        height: 60px;
+        border-radius: 5px;
+    }
+    .classConBox .classConLeft .themeLink p{
+        background-color: #fff;
+        height: 60px;
+        line-height: 60px;
+        padding:0px 20px;;
+        cursor: pointer;
+        transition: .2s ease-in-out;
+        color:#555;
+    }
+    .classConBox .classConLeft .themeLink p:hover{
+        background-color: rgba(255,255,255,.95);
+
+    }
+    .classConBox .classConLeft .themeLink.on p{
+        font-weight: bold;
+        color:#262626;
+        background-color: rgba(255,255,255,.95);
+
+    }
+
+
+    .classConCardWrap {
+        width: 100%;
+        margin-left: 20px;
+        flex-shrink: 1;
+    }
+    .classConCardWrap .makeBtnWrap{
+        position: relative;
+        margin-bottom:10px;
+        margin-top:10px;
+        width: max-content;
+    }
+    .classConCardWrap .makeSomeBtn{
+        padding:10px 20px;
+        display: flex;
+        padding-left: 14px;
+        border-radius: 100px;
+        align-items: center;
+        background-color: #555;
+        color:#fff;
+        transition: .3s ease-in-out;
+        cursor: pointer;
+    }
+    .classConCardWrap .makeSomeBtn >i {
+        color:#fff;
+        margin-top:2px;
+        margin-right: 10px;
+    }
+    .classConCardWrap .makeSomeBtn:hover{
+        box-shadow: 3px 3px 5px rgba(0,0,0,0.1);
+    }
+
+    .classConCardWrap  .makeSomeWrap{
+        position: absolute;
+        bottom:35px;
+        left:85px;
+
+        height: auto;
+        background-color: rgba(0,0,0,0.7);
+        border-radius: 4px;
+        overflow: hidden;
+        padding: 5px 0px;
+        transform: scale(0);
+        transform-origin: bottom left;
+        transition: .3s ease-in-out;
+        width: max-content;
+    }
+    .classConCardWrap  .makeSomeWrap.on{
+        transform: scale(1);
+    }
+    .classConCardWrap  .makeSomeWrap .makeBtn{
+        cursor: pointer;
+        display: block;
+        padding: 5px 15px;
+        color: #fff;
+        font-size: 13px;
+
+    }
+    .classConCardWrap  .makeSomeWrap .makeBtn:hover{
+        text-decoration: underline;
+    }
+
+    .classSomeLink > .title {
+        width: 100%;
+        flex-shrink: 1;
+        margin-left: 10px;
+        margin-right: 10px;
+        display: block;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        padding:30px 0px;
+        font-size: 15px;
+    }
+    
+    .classSomeLink {
+        width: 100%;
+        padding:0px 20px;
+        display: flex;
+        align-items: center;
+        background-color: #fff;
+        transition: .2s ease-in-out;
+    }
+
+    .classSomeLink:hover {
+        background-color: rgba(255,255,255,0.95);
+    }
+
+
+    .classSomeLinkWrap+.classSomeLinkWrap {
+        border-top:1px solid #ccc;
+    }
+
+    .moreBtnWrap{
+        position: relative
+    }
+    .moreBtn{
+        width: 30px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 100px;
+        flex-shrink: 0;
+        cursor: pointer;
+        background-color: transparent;
+        transition: .2s ease-in-out;
+    }
+    .moreBtn:hover{
+        background-color: rgba(0,0,0,0.2);
+    }
+    .moreBtn>i{
+        color:#262626;
+        font-size: 18px;
+    }
+    .moreWrap{
+        position: absolute;
+        z-index: 1;
+        height: auto;
+        background-color:rgba(0,0,0,0.7);
+        border-radius: 4px;
+        overflow: hidden;
+        right: -46px;
+        top: 28px;
+        padding:5px 0px;
+        transform: scale(0);
+        transform-origin:top left;
+        transition: .3s ease-in-out;
+    }
+    .moreWrap.on{
+        transform: scale(1);
+    }
+    .moreWrap a{
+        display: block;
+        padding:5px 15px;
+        color:#fff;
+        font-size: 13px;
+    }
+    .moreWrap a:hover{
+        text-decoration: underline;
+    }
+    .themeTitle {
+        cursor: pointer;
+        border-radius: 5px;
+    }
+    .themeTitle>p {
+        font-size: 20px;
+        padding-top:20px;
+        padding-left:20px;
+        padding-bottom:20px;
+        margin-top:20px;
+        font-weight: bold;
+        color:#262626;
+        background-color: #fff;
+        transition: .2s ease-in-out;
+    }
+    .themeTitle>p:hover {
+        background-color: rgba(255,255,255,0.95);
+    }
+    .themeTitle + .classSomeLinkWrap {
+        border-top:1px solid #262626;
+    }
+    .smallTitle {
+        display: inline-block;
+        margin-top:20px;
+        overflow: hidden;
+    }
+    .smallTitle>p{
+        padding:10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #f8f8f8;
+        /* border:1px solid #ececec; */
+        transition: .2s ease-in-out;
+
+    }
+    .smallTitle>p>i{
+        margin-left: 10px;
+        margin-top:1px;
+        font-size: 12px;
+
+    }
+    .smallTitle>p:hover {
+        background-color: rgba(255,255,255,0.95);
+    }
+    .boradConBox {
+        padding:20px;
+        background-color: #fff;
+        border:1px solid #ececec;
+        border-radius: 10px;
+    }
+    .boradConTitle {
+        display: flex;
+        justify-content: space-between;
+        padding-bottom: 15px;
+        margin-bottom: 15px;
+        border-bottom:1px solid;
+    }
+    .boradConTitle .moreBtn>i{
+        color:#262626;
+        font-size: 18px;
+    }
+
+    .boradConTitle .main {
+        font-size: 24px;
+        width: 800px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+    .boradConTitle .sub {
+        margin-top:4px;
+        font-size: 13px;
+        color:#555
+    }
+    .boradFile {
+        display: flex;
+        width: max-content;
+        align-items: center;
+        border-radius: 5px;
+        border:1px solid #dcdcdc;
+        padding:10px 20px;
+        margin-top:20px;
+        padding-top:8px;
+        padding-left: 16px;
+        position: relative;
+    }
+    .boradFile >i {
+        margin-top:2px;
+        margin-right: 8px;
+    }
+    .boradFile:hover {
+        background-color: #fafafa;
+    }
+    .boradFile .toolTipBot {
+        left: 50%;
+        margin-left: -21px;
+    }
+    .boradWorkTitle {
+        font-size: 24px;
+        padding:10px;
+        margin-top:20px;
+    }
+    .boradContent {
+        padding:10px 0px;
+    }
+    .workSubmitWrap {
+        display: flex;
+        justify-content: flex-end;
+        margin-top:20px;
+    }
+    .workSubmitWrap > button {
+        padding:10px 15px;
+        border-radius: 5px;
+        color:#fff;
+        cursor: pointer;
     }
     .welcomeMsg {
-        margin-right: 20px;
-        border: 1px solid #ececec;
         padding: 10px;
-        margin-bottom: 30px;
-        border-radius: 4px;
+        border: 1px solid #ececec;
+        border-left: 0;
+        border-radius: 0px 5px 5px 0px;
+        margin-right: 10px;
+        margin-top: 10px;
+    }
+
+    .iconCircle {
+        width: 50px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 20px;
+        border-radius: 100px;
+        flex-shrink: 0;
+    }
+    .iconCircle i {
+        color:#fff;
+        font-size: 20px;
+    }
+
+    .noClassWrap{
+        padding: 100px;
+        width: 100%;
+        background-color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        border-radius: 10px;
+    }
+    .noClassWrap > svg {
+        width: 300px;
+    }
+    .noClassWrap > p {
+        width: 100%;
+        flex-shrink: 0;
+        text-align: center;
+        margin-top:20px;
+    }
+
+
+    .myPageBox {
+        position: fixed;
+        width: 105px;
+        height: auto;
+        border-radius: 5px;
+        right: 10px;
+        border: 1px solid #ececec;
+        top: 50px;
+        z-index: 21;
+        background-color: #fff;
+        box-shadow: 3px 3px 5px rgba(0,0,0,0.1);
+        transition: .5s ease-in-out;
+        transform-origin: top;
+        opacity: 0;
+        transform: scale(0);
+        padding:10px;
+    }
+    .myPageBox.on {
+        opacity: 1;
+        transform: scale(1);
+    }
+    .myPageBox a {
+        padding:4px 10px;
+        padding-bottom:5px;
+        transition: .3s ease-in-out;
+        border-radius: 5px;
+        border:1px solid #ececec;
+
+        font-size: 10px;
+        display: inline-block;
+        width: 100%;
+        text-align: center;
+    }
+    .myPageBox a:hover{
+        background-color: #f2f2f2;
+
+    }
+    .myPageBox a+a {
+        margin-top:10px;
+
     }

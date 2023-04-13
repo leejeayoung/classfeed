@@ -58,4 +58,30 @@
 		AND user_id = #user_id#
 		AND keep_yn = #keep_yn#
 	</select>
+	
+	<select id="subjectDAO.selectSearchCount" resultClass="int" parameterClass="java.lang.String">
+		SELECT 
+			count(*)
+		FROM classfeed.subject
+		WHERE 1=1
+		AND SU_CODE = #su_code#
+		AND KEEP_YN = 'N'
+	</select>
+	
+	<select id="subjectDAO.selectSubjectBySucode" resultClass="SubjectVo" parameterClass="String">
+		select
+			b.SU_CODE, 
+			b.USER_ID, 
+			b.USER_NAME,
+			b.SU_NAME,
+			b.SSUB_NAME,
+			b.KEEP_YN
+		from
+			classfeed.class a
+			inner join classfeed.subject b
+					on a.SU_CODE = b.SU_CODE
+		where b.SU_CODE  = #su_code#
+	</select>
+	
+	
 </sqlMap>

@@ -4,6 +4,6 @@
 <configuration>
     <typeAliases>
 		<!-- <typeAlias alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/> -->
-		<typeAlias alias="usersVo" type="semi.project.domain.UsersVo"/>
+		<!-- <typeAlias alias="usersVo" type="semi.project.domain.UsersVo"/> -->
     </typeAliases>
 </configuration>

@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import lombok.extern.log4j.Log4j;
 import lombok.extern.slf4j.Slf4j;
 import semi.project.domain.UsersVo;
+import semi.project.service.ClassService;
 import semi.project.service.SubjectService;
 import semi.project.service.UsersService;
 
@@ -31,6 +32,9 @@ public class LoginController {
 	
 	@Autowired
 	private SubjectService subjectService;
+	
+	@Autowired
+	private ClassService classService;
 	
 	@Inject
     PasswordEncoder passwordEncoder;
@@ -110,10 +114,15 @@ public class LoginController {
 		String user_id = (String) session.getAttribute("userId");
 		ModelAndView mav = new ModelAndView("content/main");
 		List<UsersVo> userList = (List<UsersVo>) usersService.selectUserById(user_id);
+		String user_type = "";
 		if((userList.get(0).getUser_type()).equals("student")) {
+			user_type = userList.get(0).getUser_type();
 			mav.addObject("sList", userList);
+			mav.addObject("sSubList", classService.selectSubjectBySid(user_id));
+			mav.addObject("user_type",user_type);
 		}else {
-			
+			user_type = userList.get(0).getUser_type();
+			mav.addObject("user_type",user_type);
 			mav.addObject("tList", userList);
 			mav.addObject("tSubList", subjectService.selectSubjectByTid(user_id));
 		}

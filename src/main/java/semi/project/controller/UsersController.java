@@ -60,6 +60,7 @@ public class UsersController {
 			
 			ModelAndView mav = new ModelAndView();
 			HashMap<String, Object> map = new HashMap<String, Object>();
+			@SuppressWarnings("unchecked")
 			List<UsersVo> userList = (List<UsersVo>) usersService.selectUserById(user_id);
 			
 			if(user_id == null) {
